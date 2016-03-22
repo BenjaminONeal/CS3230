@@ -14,7 +14,7 @@ public class Pancake extends Circle
 	
 	public void draw(Graphics g)
 	{
-		g.setColor(Tile.MYGREEN);
+		g.setColor(Tile.CUSTOM_GREEN);
 		g.fillOval(30, 10, 50, 50);
 		g.setColor(Color.WHITE);
 		super.draw(g);

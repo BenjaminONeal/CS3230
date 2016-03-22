@@ -13,13 +13,14 @@ import javax.swing.JPanel;
 
 public class Tile extends JPanel
 {
-	public 	final static Color 		DARKGREEN  	= new Color(0, 139, 0);
-	public 	final static Color 		LIGHTGREEN 	= new Color(0, 255, 0);
+	public 	final static Color 		LIGHTGREEN  	= new Color(0, 139, 0);
+	public 	final static Color 		DARKGREEN 	= new Color(0, 255, 0);
+
+	public 	final static Color 		CUSTOM_GREEN  	= new Color(0, 205, 0);
+	
+	public	final static Dimension	SIZE 		= new Dimension(92, 98);
 	public 	final static Color		TOP			= new Color(255, 231, 186);
 	public 	final static Color		TOPLIGHT	= new Color(255, 250, 240);
-	public 	final static Color 		MYGREEN  	= new Color(0, 205, 0);
-	public	final static Dimension	SIZE 		= new Dimension(92, 98);
-	
 	private static int[] xPoints = {0, 0, 10, 10};
 	private static int[] yPoints = {90, 20, 10, 80};
 	private static int[] xPointsMid = {10, 10, 20, 20};
@@ -73,8 +74,8 @@ public class Tile extends JPanel
 		super.paintComponent(g);
 			
 		Graphics2D	g2 = (Graphics2D)g;
-		GradientPaint	grad = new GradientPaint(0, 70, LIGHTGREEN,
-					70, 0, DARKGREEN, true);
+		GradientPaint	grad = new GradientPaint(0, 70, DARKGREEN,
+					70, 0, LIGHTGREEN, true);
 		g2.setPaint(grad);
 		
 		g.fillPolygon(tileBottom);

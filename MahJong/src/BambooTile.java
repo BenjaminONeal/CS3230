@@ -25,49 +25,49 @@ public class BambooTile extends RankTile
 		switch(rank){
 		case 2:
 			drawBamboo(g, 49, 13, Color.BLUE);
-			drawBamboo(g, 49, 34, MYGREEN);
+			drawBamboo(g, 49, 34, CUSTOM_GREEN);
 			break;
 		case 3:
 			drawBamboo(g, 49, 13, Color.BLUE);
-			drawBamboo(g, 35, 34, MYGREEN);
-			drawBamboo(g, 63, 34, MYGREEN);
+			drawBamboo(g, 35, 34, CUSTOM_GREEN);
+			drawBamboo(g, 63, 34, CUSTOM_GREEN);
 			break;
 		case 4:
 			drawBamboo(g, 35, 13, Color.BLUE);
-			drawBamboo(g, 35, 34, MYGREEN);
-			drawBamboo(g, 63, 13, MYGREEN);
+			drawBamboo(g, 35, 34, CUSTOM_GREEN);
+			drawBamboo(g, 63, 13, CUSTOM_GREEN);
 			drawBamboo(g, 63, 34, Color.BLUE);
 			break;
 		case 5:
-			drawBamboo(g, 28, 13, MYGREEN);
+			drawBamboo(g, 28, 13, CUSTOM_GREEN);
 			drawBamboo(g, 28, 34, Color.BLUE);
 			drawBamboo(g, 49, 25, Color.RED);
 			drawBamboo(g, 70, 13, Color.BLUE);
-			drawBamboo(g, 70, 34, MYGREEN);
+			drawBamboo(g, 70, 34, CUSTOM_GREEN);
 			break;
 		case 6:
-			drawBamboo(g, 28, 13, MYGREEN);
+			drawBamboo(g, 28, 13, CUSTOM_GREEN);
 			drawBamboo(g, 28, 34, Color.BLUE);
-			drawBamboo(g, 49, 13, MYGREEN);
+			drawBamboo(g, 49, 13, CUSTOM_GREEN);
 			drawBamboo(g, 49, 34, Color.BLUE);
-			drawBamboo(g, 70, 13, MYGREEN);
+			drawBamboo(g, 70, 13, CUSTOM_GREEN);
 			drawBamboo(g, 70, 34, Color.BLUE);
 			break;
 		case 7:
 			drawBamboo(g, 49, 3, Color.RED);
-			drawBamboo(g, 28, 25, MYGREEN);
+			drawBamboo(g, 28, 25, CUSTOM_GREEN);
 			drawBamboo(g, 28, 46, Color.BLUE);
-			drawBamboo(g, 49, 25, MYGREEN);
+			drawBamboo(g, 49, 25, CUSTOM_GREEN);
 			drawBamboo(g, 49, 46, Color.BLUE);
-			drawBamboo(g, 70, 25, MYGREEN);
+			drawBamboo(g, 70, 25, CUSTOM_GREEN);
 			drawBamboo(g, 70, 46, Color.BLUE);
 			break;
 		case 8:
-			drawBamboo(g, 28, 3, MYGREEN);
+			drawBamboo(g, 28, 3, CUSTOM_GREEN);
 			drawBamboo(g, 28, 46, Color.BLUE);
-			drawBamboo(g, 49, 3, MYGREEN);
+			drawBamboo(g, 49, 3, CUSTOM_GREEN);
 			drawBamboo(g, 49, 46, Color.BLUE);
-			drawBamboo(g, 70, 3, MYGREEN);
+			drawBamboo(g, 70, 3, CUSTOM_GREEN);
 			drawBamboo(g, 70, 46, Color.BLUE);
 			drawBamboo(g, 35, 24, Color.RED);
 			drawBamboo(g, 63, 24, Color.RED);
@@ -77,11 +77,11 @@ public class BambooTile extends RankTile
 			drawBamboo(g, 28, 24, Color.RED);
 			drawBamboo(g, 49, 3, Color.BLUE);
 			drawBamboo(g, 49, 24, Color.BLUE);
-			drawBamboo(g, 70, 3, MYGREEN);
-			drawBamboo(g, 70, 24, MYGREEN);
+			drawBamboo(g, 70, 3, CUSTOM_GREEN);
+			drawBamboo(g, 70, 24, CUSTOM_GREEN);
 			drawBamboo(g, 28, 46, Color.RED);
 			drawBamboo(g, 49, 46, Color.BLUE);
-			drawBamboo(g, 70, 46, MYGREEN);
+			drawBamboo(g, 70, 46, CUSTOM_GREEN);
 			break;
 		}
 		
