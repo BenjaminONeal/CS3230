@@ -108,13 +108,13 @@ public class BambooTile extends RankTile
 		frame.setTitle("Bamboo Tiles");
 
 		frame.add(new BambooTile(2));
-		frame.add(new BambooTile(3));
-		frame.add(new BambooTile(4));
-		frame.add(new BambooTile(5));
-		frame.add(new BambooTile(6));
-		frame.add(new BambooTile(7));
-		frame.add(new BambooTile(8));
-		frame.add(new BambooTile(9));
+//		frame.add(new BambooTile(3));
+//		frame.add(new BambooTile(4));
+//		frame.add(new BambooTile(5));
+//		frame.add(new BambooTile(6));
+//		frame.add(new BambooTile(7));
+//		frame.add(new BambooTile(8));
+//		frame.add(new BambooTile(9));
 
 		frame.pack();
 		frame.setVisible(true);

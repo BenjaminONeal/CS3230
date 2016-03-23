@@ -18,8 +18,8 @@ public class CircleTile extends RankTile
 			circles[0] = new Pancake( 49, 29, Color.RED);
 			break;
 		case 2:
-			circles[0] = new Circle(45 + 3, 35 - 21, CUSTOM_GREEN);
-			circles[1] = new Circle(45 + 3, 35 + 9, Color.RED);
+			circles[0] = new Circle(48, 14, CUSTOM_GREEN);
+			circles[1] = new Circle(49, 44, Color.RED);
 			break;
 		case 3:
 			circles[0] = new Circle(25, 5, Color.BLUE);
@@ -27,10 +27,10 @@ public class CircleTile extends RankTile
 			circles[2] = new Circle(72, 52, CUSTOM_GREEN);
 			break;
 		case 4:
-			circles[0] = new Circle(45 - 12, 35 - 21, Color.BLUE);
-			circles[1] = new Circle(45 - 12, 35 + 9, CUSTOM_GREEN);
-			circles[2] = new Circle(45 + 18, 35 - 21, CUSTOM_GREEN);
-			circles[3] = new Circle(45 + 18, 35 + 9, Color.BLUE);
+			circles[0] = new Circle(33, 14, Color.BLUE);
+			circles[1] = new Circle(33, 44, CUSTOM_GREEN);
+			circles[2] = new Circle(63, 14, CUSTOM_GREEN);
+			circles[3] = new Circle(63, 44, Color.BLUE);
 			break;
 		case 5:
 			circles[0] = new Circle(25, 5, Color.BLUE);
@@ -40,31 +40,31 @@ public class CircleTile extends RankTile
 			circles[4] = new Circle(25, 52, CUSTOM_GREEN);
 			break;
 		case 6:
-			circles[0] = new Circle(45 - 12, 5, CUSTOM_GREEN);
-			circles[1] = new Circle(45 + 18, 5, CUSTOM_GREEN);
-			circles[2] = new Circle(45 - 12, 29, Color.RED);
-			circles[3] = new Circle(45 + 18, 29, Color.RED);
-			circles[4] = new Circle(45 - 12, 52, Color.RED);
-			circles[5] = new Circle(45 + 18, 52, Color.RED);
+			circles[0] = new Circle(33, 5, CUSTOM_GREEN);
+			circles[1] = new Circle(63, 5, CUSTOM_GREEN);
+			circles[2] = new Circle(33, 29, Color.RED);
+			circles[3] = new Circle(63, 29, Color.RED);
+			circles[4] = new Circle(33, 52, Color.RED);
+			circles[5] = new Circle(63, 52, Color.RED);
 			break;
 		case 7:
 			circles[0] = new Circle(25, 5, CUSTOM_GREEN);
 			circles[1] = new Circle(49, 15, CUSTOM_GREEN);
 			circles[2] = new Circle(72, 27, CUSTOM_GREEN);
-			circles[3] = new Circle(45 - 12, 38, Color.RED);
-			circles[4] = new Circle(45 + 18, 38, Color.RED);
-			circles[5] = new Circle(45 - 12, 52, Color.RED);
-			circles[6] = new Circle(45 + 18, 52, Color.RED);
+			circles[3] = new Circle(33, 38, Color.RED);
+			circles[4] = new Circle(63, 38, Color.RED);
+			circles[5] = new Circle(33, 52, Color.RED);
+			circles[6] = new Circle(63, 52, Color.RED);
 			break;
 		case 8:
-			circles[0] = new Circle(45 - 12, 2, Color.BLUE);
-			circles[1] = new Circle(45 + 18, 2, Color.BLUE);
-			circles[2] = new Circle(45 - 12, 20, Color.BLUE);
-			circles[3] = new Circle(45 + 18, 20, Color.BLUE);
-			circles[4] = new Circle(45 - 12, 38, Color.BLUE);
-			circles[5] = new Circle(45 + 18, 38, Color.BLUE);
-			circles[6] = new Circle(45 + 18, 55, Color.BLUE);
-			circles[7] = new Circle(45 - 12, 55, Color.BLUE);
+			circles[0] = new Circle(33, 2, Color.BLUE);
+			circles[1] = new Circle(63, 2, Color.BLUE);
+			circles[2] = new Circle(33, 20, Color.BLUE);
+			circles[3] = new Circle(63, 20, Color.BLUE);
+			circles[4] = new Circle(33, 38, Color.BLUE);
+			circles[5] = new Circle(63, 38, Color.BLUE);
+			circles[6] = new Circle(63, 55, Color.BLUE);
+			circles[7] = new Circle(33, 55, Color.BLUE);
 			break;
 		case 9:
 			circles[0] = new Circle(25, 5, CUSTOM_GREEN);

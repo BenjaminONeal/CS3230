@@ -42,7 +42,7 @@ public class CharacterTile extends AbstractCharacterTile
 		g.setColor(c);
 		f = f.deriveFont(f.getSize2D() * 2F);
 		g.setFont(f);
-		g.drawString( chineseSymbol, (getWidth() - (wid - 5)) / 2, (getHeight() + 25) / 4);
+		g.drawString(chineseSymbol, (getWidth() - (wid - 5)) / 2, (getHeight() + 25) / 4);
 		
 		g.setColor(Color.RED);
 		g.drawString(Tile.chineseChars.get("wan"), (getWidth() - (wid - 5)) / 2, (getHeight() + 25) / 2);
@@ -50,18 +50,14 @@ public class CharacterTile extends AbstractCharacterTile
 	
 	public static void main(String[] args)
 	{
-		JFrame		frame = new JFrame();
-		JPanel		tiles = new JPanel();
+		JFrame frame = new JFrame();
+		JPanel tiles = new JPanel();
 		JScrollPane	scroller = new JScrollPane(tiles);
-		
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Character Tiles");
 		frame.add(scroller);
 
-		// Try something like this if your tiles don't fit on the screen.
-		// Replace "tile width" and "tile height" with your values.
-		// scroller.setPreferredSize(new Dimension(15 * 92, 40 + 98));
 		tiles.add(new CharacterTile('1'));
 		tiles.add(new CharacterTile('2'));
 		tiles.add(new CharacterTile('3'));

@@ -13,14 +13,16 @@ import javax.swing.JPanel;
 
 public class Tile extends JPanel
 {
-	public 	final static Color 		LIGHTGREEN  	= new Color(0, 139, 0);
-	public 	final static Color 		DARKGREEN 	= new Color(0, 255, 0);
+	public 	final static Color LIGHTBLUE = new Color(99, 184, 255);	//used to build color in the sides of the tile
+	public 	final static Color DARKBLUE = new Color(0, 0, 255);		//same
 
-	public 	final static Color 		CUSTOM_GREEN  	= new Color(0, 205, 0);
+	public 	final static Color CUSTOM_GREEN = new Color(0, 205, 0);	//used in decorating the tile tops
 	
-	public	final static Dimension	SIZE 		= new Dimension(92, 98);
-	public 	final static Color		TOP			= new Color(255, 231, 186);
-	public 	final static Color		TOPLIGHT	= new Color(255, 250, 240);
+	public	final static Dimension SIZE = new Dimension(92, 98);
+	public 	final static Color TOP = new Color(255, 231, 186);		//colors for tops
+	public 	final static Color TOPLIGHT	= new Color(255, 250, 240);	//same
+
+	//reference points for tiles
 	private static int[] xPoints = {0, 0, 10, 10};
 	private static int[] yPoints = {90, 20, 10, 80};
 	private static int[] xPointsMid = {10, 10, 20, 20};
@@ -29,6 +31,8 @@ public class Tile extends JPanel
 	private static int[] yPointsSide = {80, 80, 90, 90};
 	private static int[] xPointsSide2 = {90, 20, 10, 80};
 	private static int[] yPointsSide2 = {70, 70, 80, 80};
+
+	//polygons for tiles
 	public static Polygon tileBottom;
 	public static Polygon tileMiddle;
 	public static Polygon tileSide;
@@ -73,16 +77,14 @@ public class Tile extends JPanel
 	{
 		super.paintComponent(g);
 			
-		Graphics2D	g2 = (Graphics2D)g;
-		GradientPaint	grad = new GradientPaint(0, 70, DARKGREEN,
-					70, 0, LIGHTGREEN, true);
+		Graphics2D g2 = (Graphics2D)g;
+		GradientPaint grad = new GradientPaint(0, 70, LIGHTBLUE, 70, 0, DARKBLUE, true);
 		g2.setPaint(grad);
 		
 		g.fillPolygon(tileBottom);
 		g.fillPolygon(tileSide);
 		
-		GradientPaint gradTop = new GradientPaint(20, 70, TOPLIGHT, 
-				70, 0, TOP, false);
+		GradientPaint gradTop = new GradientPaint(20, 70, TOPLIGHT, 70, 0, TOP, false);
 		
 		g2.setPaint(gradTop);
 		g.fillRect(20, 0, 70, 70);
@@ -105,9 +107,7 @@ public class Tile extends JPanel
 	public static void main(String[] args)
 	{
 		JFrame	frame = new JFrame();
-
 		frame.setLayout(new FlowLayout());
-		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Tile");
 		frame.add(new Tile());
