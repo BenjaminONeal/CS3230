@@ -10,6 +10,7 @@ public class BambooTile extends RankTile
 	public BambooTile(int rank)
 	{
 		super(rank);
+		setToolTipText(toString());
 	}
 
 	@Override

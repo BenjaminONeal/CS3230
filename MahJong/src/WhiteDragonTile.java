@@ -10,6 +10,10 @@ import javax.swing.JFrame;
 
 public class WhiteDragonTile extends Tile
 {
+	public WhiteDragonTile()
+	{
+		setToolTipText(toString());
+	}
 	@Override
 	public String toString()
 	{
