@@ -90,13 +90,13 @@ public class BambooTile extends RankTile
 	public void drawBamboo(Graphics g, int x, int y, Color c)
 	{
 		g.setColor(c);
-		g.fillOval(x, y, 10, 5);
-		g.fillOval(x, y+16, 10, 5);
-		g.fillRoundRect(x+2, y+1, 6, 20, 2, 2);
+		g.fillOval(x, y, 11, 5);
+		g.fillOval(x, y+8, 11, 5);
+		g.fillOval(x, y+16, 11, 5);
+		g.fillRoundRect(x+3, y+1, 6, 20, 2, 2);
 		g.setColor(Color.WHITE);
-		g.drawLine(x+5, y+2, x+5, y+19);
-		g.setColor(c);
-		g.fillOval(x, y+8, 10, 5);
+		g.drawLine(x+6, y+4, x+6, y+16);	//Vertical line
+		g.drawLine(x+3, y+10, x+8, y+10);	//Horizontal line
 	}
 	
 	public static void main(String[] args)
@@ -108,13 +108,13 @@ public class BambooTile extends RankTile
 		frame.setTitle("Bamboo Tiles");
 
 		frame.add(new BambooTile(2));
-//		frame.add(new BambooTile(3));
-//		frame.add(new BambooTile(4));
-//		frame.add(new BambooTile(5));
-//		frame.add(new BambooTile(6));
-//		frame.add(new BambooTile(7));
-//		frame.add(new BambooTile(8));
-//		frame.add(new BambooTile(9));
+		frame.add(new BambooTile(3));
+		frame.add(new BambooTile(4));
+		frame.add(new BambooTile(5));
+		frame.add(new BambooTile(6));
+		frame.add(new BambooTile(7));
+		frame.add(new BambooTile(8));
+		frame.add(new BambooTile(9));
 
 		frame.pack();
 		frame.setVisible(true);
