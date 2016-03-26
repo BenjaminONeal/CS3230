@@ -20,9 +20,9 @@ public class Circle
 	public void draw(Graphics g)
 	{
 		g.setColor(c);
-		g.fillOval(x, y, 14, 14);//(x, y, 12 , 12);
+		g.fillOval(x, y, 14, 14);
 		g.setColor(Color.WHITE);
-		g.drawLine(x+5, y+5, x+9, y+9);//(x+4, y+4, x+8, y+8);
-		g.drawLine(x+9, y+5, x+5, y+9);//(x+8, y+4, x+4, y+8);
+		g.drawLine(x+5, y+5, x+9, y+9);
+		g.drawLine(x+9, y+5, x+5, y+9);
 	}
 }

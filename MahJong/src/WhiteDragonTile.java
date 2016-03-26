@@ -31,8 +31,6 @@ public class WhiteDragonTile extends Tile
 		Graphics2D g2 = (Graphics2D)g;
 		g2.setStroke(blocks);
 		g2.drawRect(30, 10, 50, 50);
-		
-		
 	}
 	
 	public static void main(String[] args)

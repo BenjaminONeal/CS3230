@@ -15,8 +15,6 @@ public abstract class RankTile extends Tile
 	public boolean matches(Tile other)
 	{
 		RankTile otherObject = (RankTile) other;
-		return super.matches(other)
-				&& rank == otherObject.rank
-				&& Objects.equals(rank, otherObject.rank);
+		return super.matches(other) && rank == otherObject.rank && Objects.equals(rank, otherObject.rank);
 	}
 }

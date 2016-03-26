@@ -22,8 +22,7 @@ public class Pancake extends Circle
 		g.drawOval(30, 10, 50, 50);
 		Graphics2D	g2 = (Graphics2D)g;
 		g2.setColor(Color.WHITE);
-		g2.setStroke(new BasicStroke(4.0f, BasicStroke.CAP_ROUND, 
-				BasicStroke.JOIN_MITER, 5.0f, new float[] {0.4f, 7.0f}, 10.0f));
+		g2.setStroke(new BasicStroke(4.0f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER, 5.0f, new float[] {0.4f, 7.0f}, 10.0f));
 		g2.drawOval(35, 15, 40, 40);
 		
 	}
