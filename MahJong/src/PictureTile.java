@@ -52,7 +52,7 @@ public abstract class PictureTile extends Tile
 			g.drawImage(Spring, 25, 10, this);
 			break;
 		case "Summer":
-			g.drawImage(Summer, 24, 5, this);
+			g.drawImage(Summer, 25, 5, this);
 			break;
 		case "Fall":
 			g.drawImage(Fall, 25, 5, this);
@@ -61,10 +61,10 @@ public abstract class PictureTile extends Tile
 			g.drawImage(Winter, 25, 5, this);
 			break;
 		case "Chrysanthemum":
-			g.drawImage(Chrysanthemum, 22, 5, this);
+			g.drawImage(Chrysanthemum, 25, 5, this);
 			break;
 		case "Orchid":
-			g.drawImage(Orchid, 22, 5, this);
+			g.drawImage(Orchid, 25, 5, this);
 			break;
 		case "Plum":
 			g.drawImage(Plum, 28, 5, this);

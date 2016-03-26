@@ -24,8 +24,7 @@ public class WhiteDragonTile extends Tile
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		Stroke blocks = new BasicStroke(4, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_BEVEL, 
-				0, new float[]{6, 14}, 0);
+		Stroke blocks = new BasicStroke(4, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_BEVEL, 0, new float[]{4, 10}, 0);
 		g.setColor(Color.BLUE);
 		g.drawRect(28, 8, 54, 54);
 		g.drawRect(32, 12, 46, 46);
