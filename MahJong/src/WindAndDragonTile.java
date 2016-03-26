@@ -52,7 +52,7 @@ public class WindAndDragonTile extends AbstractCharacterTile
 		int wid = fm.stringWidth(chineseSymbol);
 		
 		g.setColor(c);
-		f = f.deriveFont(f.getSize2D() * 4.5F);
+		f = f.deriveFont(f.getSize2D() * 4.25F);
 		g.setFont(f);
 		g.drawString( chineseSymbol, (getWidth() - (wid + 25) ) / 2, (getHeight() + 20) / 2);
 	}
