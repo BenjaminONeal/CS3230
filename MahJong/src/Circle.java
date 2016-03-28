@@ -4,7 +4,6 @@ import java.awt.Graphics;
 
 public class Circle
 {
-	
 	private int x;
 	private int y;
 	private Color c;

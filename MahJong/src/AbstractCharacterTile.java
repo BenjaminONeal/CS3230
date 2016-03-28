@@ -7,7 +7,6 @@ public abstract class AbstractCharacterTile extends Tile
 {
 	protected char symbol;
 	
-	
 	public AbstractCharacterTile(char symbol)
 	{
 		this.symbol = symbol;

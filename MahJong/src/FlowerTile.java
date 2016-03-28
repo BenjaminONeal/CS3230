@@ -9,7 +9,6 @@ import javax.swing.JFrame;
 
 public class FlowerTile extends PictureTile
 {
-	
 	public FlowerTile(String name)
 	{
 		super(name);

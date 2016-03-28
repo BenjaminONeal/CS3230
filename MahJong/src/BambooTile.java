@@ -85,7 +85,6 @@ public class BambooTile extends RankTile
 			drawBamboo(g, 70, 46, CUSTOM_GREEN);
 			break;
 		}
-		
 	}
 	
 	public void drawBamboo(Graphics g, int x, int y, Color c)
@@ -120,5 +119,4 @@ public class BambooTile extends RankTile
 		frame.pack();
 		frame.setVisible(true);
 	}
-	
 }
