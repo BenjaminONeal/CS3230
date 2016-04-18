@@ -22,6 +22,20 @@ public class Tile extends JPanel
 	public 	final static Color TOP = new Color(255, 231, 186);		//colors for tops
 	public 	final static Color TOPLIGHT	= new Color(255, 250, 240);	//same
 
+	
+	protected int x;
+	protected int y;
+	private int zOrder;
+	protected Tile left = null;
+	protected Tile left2 = null;
+	protected Tile right = null;
+	protected Tile right2 = null;
+	protected Tile top = null;
+	protected Tile bottom = null;
+	protected Tile bottom2 = null;
+	protected Tile bottom3 = null;
+	protected Tile bottom4 = null;
+	
 	//reference points for tiles
 	private static int[] xPoints = {0, 0, 10, 10};
 	private static int[] yPoints = {90, 20, 10, 80};
@@ -69,8 +83,13 @@ public class Tile extends JPanel
 	public Tile()
 	{
 		setPreferredSize(SIZE);
+		setSize(SIZE);
+		setOpaque(false);
 	}
-	
+	public void setZOrder()
+	{
+		zOrder = getParent().getComponentZOrder(this);
+	}
 	
 	@Override
 	public void paintComponent(Graphics g)
