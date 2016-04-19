@@ -86,11 +86,17 @@ public class Tile extends JPanel
 		setSize(SIZE);
 		setOpaque(false);
 	}
+
 	public void setZOrder()
 	{
 		zOrder = getParent().getComponentZOrder(this);
 	}
-	
+
+	public int getZOrder()
+	{
+		return zOrder;
+	}
+
 	@Override
 	public void paintComponent(Graphics g)
 	{

@@ -9,7 +9,9 @@ import javax.swing.border.*;
 public class MahJong extends JFrame 
 {
 	private JFrame frame = new JFrame();
+	private Container container;
 	private ImageIcon image;
+	private ScrollPane scrollPane = new ScrollPane();
 	private URL url;
 	private Tile first = null;
 	private Tile second = null;
@@ -18,6 +20,11 @@ public class MahJong extends JFrame
 	private Board board = new Board();
 	private Border selected = BorderFactory.createLineBorder(Color.RED);
 	private int removedCount = 0;
+
+	private int xCoord1;
+	private int yCoord1;
+	private int xCoord2;
+	private int yCoord2;
 	
 	
 	public MahJong()
@@ -28,6 +35,217 @@ public class MahJong extends JFrame
 		setTitle("Mah Jong Solitare");
 		setVisible(true);
 		add(board);
+	}
+	
+	public void drawMenu()
+	{
+		JMenuBar	menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+
+		JMenu	gameMenu = new JMenu("Game");
+		gameMenu.setMnemonic('D');
+		menuBar.add(gameMenu);
+
+		JMenuItem	play = new JMenuItem("Play", 'P');
+		play.setToolTipText("Start New Game");
+		gameMenu.add(play);
+		play.addActionListener(new ActionListener()
+				{ public void actionPerformed(ActionEvent e)
+					{ play(); }
+				});
+
+		JMenuItem	restart = new JMenuItem("Restart", 'R');
+		restart.setToolTipText("Restart Game");
+		gameMenu.add(restart);
+		restart.addActionListener(new ActionListener()
+				{ public void actionPerformed(ActionEvent e)
+					{ restart(); }
+				});
+
+		JMenuItem quit = new JMenuItem("Quit", 'Q');
+		quit.setToolTipText("Quit Game");
+		gameMenu.add(quit);
+		quit.addActionListener(new ActionListener()
+			{ public void actionPerformed(ActionEvent e)
+				{ exit(); }
+			});
+		
+//		ButtonGroup	group = new ButtonGroup();
+//		JMenu		soundMenu = new JMenu("Sound");
+//		soundMenu.setMnemonic('S');
+//		menuBar.add(soundMenu);
+//
+//		JRadioButtonMenuItem	on = new JRadioButtonMenuItem("On", true);
+//		group.add(on);
+//		soundMenu.add(on);
+//		on.setToolTipText("Turn Sound On");
+//		on.setAccelerator(KeyStroke.getKeyStroke("ctrl O"));
+//		on.setMnemonic('O');
+//		on.addActionListener(new ActionListener()
+//				{ public void actionPerformed(ActionEvent e)
+//					{ sound = true;
+//					fw.sound = true; }
+//				});
+//		
+//		JRadioButtonMenuItem	off = new JRadioButtonMenuItem("Off");
+//		group.add(off);
+//		soundMenu.add(off);
+//		off.setToolTipText("Turn Sound Off");
+//		off.setAccelerator(KeyStroke.getKeyStroke("ctrl F"));
+//		off.setMnemonic('F');
+//		off.addActionListener(new ActionListener()
+//				{ public void actionPerformed(ActionEvent e)
+//					{ sound = false;
+//					fw.sound = false; }
+//				});
+		
+		JMenu	moveMenu = new JMenu("Move");
+		moveMenu.setMnemonic('M');
+		menuBar.add(moveMenu);
+
+		JMenuItem	view = new JMenuItem("View", 'V');
+		view.setToolTipText("View Your Moves");
+		moveMenu.add(view);
+		view.addActionListener(new ActionListener()
+				{ public void actionPerformed(ActionEvent e)
+					{ JOptionPane.showMessageDialog(null, scrollPane,
+							"Removed Tiles", JOptionPane.PLAIN_MESSAGE); }
+				});
+		
+		JMenuItem	undo = new JMenuItem("Undo", 'U');
+		undo.setToolTipText("Undo Last Move");
+		moveMenu.add(undo);
+		undo.addActionListener(new ActionListener()
+				{public void actionPerformed(ActionEvent e)
+				{ Undo(); }
+		
+				});
+			
+//		JMenu	helpMenu = new JMenu("Help");
+//		helpMenu.setMnemonic('H');
+//		menuBar.add(helpMenu);
+//
+//		JMenuItem	rules = new JMenuItem("Rules", 'R');
+//		rules.setToolTipText("Game Rules");
+//		helpMenu.add(rules);
+//		rules.addActionListener(new ActionListener()
+//				{ public void actionPerformed(ActionEvent e)
+//					{  gameRules.display(); }
+//				});
+//		
+//		JMenuItem	instructions = new JMenuItem("Instructions", 'I');
+//		instructions.setToolTipText("Game Rules");
+//		helpMenu.add(instructions);
+//		instructions.addActionListener(new ActionListener()
+//				{ public void actionPerformed(ActionEvent e)
+//					{  gameInstructions.display(); }
+//				});
+	}
+	
+	public void play()
+	{	
+		if (JOptionPane.showConfirmDialog(this,
+				"Do you want to play a new game?", "End Program",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION){
+		
+			container = getContentPane();
+			container.removeAll();
+			board = new Board();
+			container.add(board);
+			validate();
+			removedCount = 0;
+		}
+	}
+	
+	public void Undo()
+	{
+		if (JOptionPane.showConfirmDialog(this,
+				"Do you want to undo the latest move?", "End Program",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION)
+			undoMove();	
+	}
+	
+	public void undoMove()
+	{
+		t1 = scrollPane.undoStack.peek();
+		scrollPane.undoStack.pop();
+		t2 = scrollPane.undoStack.peek();
+		scrollPane.undoStack.pop();
+		t1.addMouseListener(board); 
+		t2.addMouseListener(board);
+		xCoord1 = t1.x;
+		yCoord1 = t1.y;
+		
+		if (t1.left == null && t1.right != null)
+			t1.right.left = t1;
+		else if (t1.right == null && t1.left != null)
+			t1.left.right = t1;
+		
+		if (t1.bottom != null)
+			t1.bottom.top = t1;
+			
+		if (t1.bottom2 != null && 
+				t1.bottom3 != null && t1.bottom4 != null){
+			
+			t1.bottom2.top = t1;
+			t1.bottom3.top = t1;
+			t1.bottom4.top = t1;
+			
+		}
+		
+		if (t1.left2 == null && t1.right2 != null)
+			t1.right2.left = t1;
+		else if (t1.right2 == null && t1.left2 != null)
+			t1.left2.right = t1;
+		
+		xCoord2 = t2.x;
+		yCoord2 = t2.y;
+		
+		if (t2.left == null && t2.right != null)
+			t2.right.left = t2;
+		else if (t2.right == null && t2.left != null)
+			t2.left.right = t2;
+		
+		if (t2.bottom != null)
+			t2.bottom.top = t2;
+			
+		if (t2.bottom2 != null && 
+				t2.bottom3 != null && t2.bottom4 != null){
+		
+			t2.bottom2.top = t2;
+			t2.bottom3.top = t2;
+			t2.bottom4.top = t2;
+						
+		}
+			
+		if (t2.left2 == null && t2.right2 != null)
+			t2.right2.left = t2;
+		else if (t2.right2 == null && t2.left2 != null)
+			t2.left2.right = t2;
+		
+		t1.setLocation(xCoord1, yCoord1);
+		board.add(t1);
+		t2.setLocation(xCoord2, yCoord2);
+		board.add(t2);
+		board.setComponentZOrder(t1, t1.getZOrder());
+		board.setComponentZOrder(t2, t2.getZOrder());
+		
+		revalidate();
+		repaint();
+		removedCount--;
+	
+	}
+	
+	public void restart(){	
+		if (JOptionPane.showConfirmDialog(this,
+				"Do you want to restart the current game?", "Restart Game",
+				JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION){
+			while (!scrollPane.undoStack.empty()) 
+				undoMove();
+		}
 	}
 	
 	public void exit()
@@ -44,6 +262,7 @@ public class MahJong extends JFrame
 		{	
 			setLayout(null);
 			setBackground(Color.YELLOW);
+			drawMenu();
 		
 			Tile tile;
 			TileStack tileStack = new TileStack();
@@ -421,6 +640,8 @@ public class MahJong extends JFrame
 						first.setZOrder();
 						remove(first);
 						repaint();
+						
+						scrollPane.addToUndo(second, first);
 												
 						first = null;
 						second = null;						
