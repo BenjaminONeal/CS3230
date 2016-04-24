@@ -264,6 +264,10 @@ public class MahJong extends JFrame
 			setBackground(Color.YELLOW);
 			drawMenu();
 		
+			url = Board.class.getResource("images/dragon_bg.png");
+			image = new ImageIcon(url);
+			image = new ImageIcon(image.getImage().getScaledInstance(655, -1, 
+					Image.SCALE_SMOOTH));
 			Tile tile;
 			TileStack tileStack = new TileStack();
 			
@@ -644,7 +648,9 @@ public class MahJong extends JFrame
 						scrollPane.addToUndo(second, first);
 												
 						first = null;
-						second = null;						
+						second = null;
+						PlayClip clip = new PlayClip("audio/stone-scraping.wav", true);
+						clip.play();
 					}
 					
 					removedCount++;
@@ -675,6 +681,8 @@ public class MahJong extends JFrame
 		
 	public static void main(String[] args)
 	{	
+		PlayClip clip = new PlayClip("audio/stone-scraping.wav", true);
+		clip.play();
 		new MahJong();	
 	}
 }
