@@ -1,41 +1,37 @@
 import java.awt.*;
+
 import javax.swing.*;
 
-public class Bamboo extends JPanel{
-	
-	/**
-	 * 
-	 */
+public class Bamboo extends JPanel
+{
 	private static final long serialVersionUID = 1L;
-	private int x;
-	private int y;
+	
+	private int xCoord;
+	private int yCoord;
 	private Color color;
 	
-	public Bamboo(int x, int y, Color color){
-		
-		this.x = x;
-		this.y = y;
+	public Bamboo(int xCoord, int yCoord, Color color)
+	{	
+		this.xCoord = xCoord;
+		this.yCoord = yCoord;
 		this.color = color;
-		
 	}
 	
-	public void draw(Graphics g){
-		
+	public void draw(Graphics g)
+	{	
 		g.setColor(color);
-		g.fillArc(x, y, 11, 11, 0, 180);
-		g.fillRect(x + 4, y + 1, 4, 7);
+		g.fillArc(xCoord, yCoord, 11, 11, 0, 180);
+		g.fillRect(xCoord + 4, yCoord + 1, 4, 7);
 		g.setColor(Color.WHITE);
-		g.drawLine(x + 6, y + 5, x + 6, y + 7);
+		g.drawLine(xCoord + 6, yCoord + 5, xCoord + 6, yCoord + 7);
 		
 		g.setColor(color);
-		g.fillArc(x, y + 7, 11, 11, 0, 180);
-		g.fillRect(x + 4, y + 8, 4, 7);
+		g.fillArc(xCoord, yCoord + 7, 11, 11, 0, 180);
+		g.fillRect(xCoord + 4, yCoord + 8, 4, 7);
 		g.setColor(Color.WHITE);
-		g.drawLine(x + 6, y + 12, x + 6, y + 14);
+		g.drawLine(xCoord + 6, yCoord + 12, xCoord + 6, yCoord + 14);
 		
 		g.setColor(color);
-		g.fillArc(x, y + 14, 11, 11, 0, 180);
-		
+		g.fillArc(xCoord, yCoord + 14, 11, 11, 0, 180);	
 	}
-
 }

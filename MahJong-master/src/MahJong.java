@@ -6,39 +6,33 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
-public class MahJong extends JFrame {
-	/*All commented out code in this file and in TileStack.java are related to the 
-	 * numbered game feature, which I was not able to get working.  It was giving me a 
-	 * null pointer error for some reason, and thus had to be commented out to make
-	 * everything else functional.  But I did want to show that I at least made some 
-	 * attempt to implement it anyways.*/
-	/**
-	 * 
-	 */
+public class MahJong extends JFrame
+{
 	private static final long serialVersionUID = 1L;
-	private Container contain;
-	private Help gameRules = new Help("help/rules.html", "Game Rules");
-	private Help gameInstructions = new Help("help/instructions.html", "Game Instructions");
-	private ImageIcon	image;
+
+	private Container container;
+	private ImageIcon imageIcon;
 	private URL url;
+
 	private Tile first = null;
 	private Tile second = null;
-	private Tile t1;
-	private Tile t2;
-	private Fireworks	fw = new Fireworks();
+	private Tile tile1;
+	private Tile tile2;
+	private int xCoord1;
+	private int yCoord1;
+	private int xCoord2;
+	private int yCoord2;
+
 	private JFrame frame = new JFrame();
-	private Board b = new Board();
-	//private NumberedGame numberedGame = new NumberedGame();
-	private ScrollPane scroller = new ScrollPane();
-	private Border selected = BorderFactory.createLineBorder(Color.RED);
+	private Board board= new Board();
+	private ScrollPane scrollPane = new ScrollPane();
+	private Border selectedTile = BorderFactory.createLineBorder(Color.RED);
+	
 	private boolean sound = true;
-	//private long number;
-	//private long promptNumber;
+	private Fireworks fireworks = new Fireworks();
+	private Help gameRules = new Help("help/rules.html", "Game Rules");
+	private Help gameInstructions = new Help("help/instructions.html", "Game Instructions");
 	private int removedCount = 0;
-	private int x1;
-	private int y1;
-	private int x2;
-	private int y2;
 	
 	public MahJong(){
 		
@@ -51,43 +45,20 @@ public class MahJong extends JFrame {
 		
 		setSize(945, 695);
 		setTitle("Mah Jong Solitare");
-		setVisible(true);
-		
-		/*if (JOptionPane.showConfirmDialog(this,
-				"Would you like to play a numbered game?", "End Program",
-				JOptionPane.YES_NO_OPTION,
-				JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION){
-			
-			promptNumber = Integer.parseInt(JOptionPane.showInputDialog("Please Enter the number of the "
-					+ "game you would like to play."));
-			
-			if (promptNumber == numberedGame.number){
-				
-				numberedGame.setVisible(true);
-				
-			}
-			
-		}*/
-		
-		//else{
-		
-			add(b);
-			//revalidate();
-		
-		//}
-		
+		setVisible(true);		
+		add(board);
 	}
 	
-	private void makeMenu()
+	private void drawMenu()
 	{
-		JMenuBar	menuBar = new JMenuBar();
+		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
-		JMenu	gameMenu = new JMenu("Game");
+		JMenu gameMenu = new JMenu("Game");
 		gameMenu.setMnemonic('D');
 		menuBar.add(gameMenu);
 
-		JMenuItem	play = new JMenuItem("Play", 'P');
+		JMenuItem play = new JMenuItem("Play", 'P');
 		play.setToolTipText("Start New Game");
 		gameMenu.add(play);
 		play.addActionListener(new ActionListener()
@@ -95,7 +66,7 @@ public class MahJong extends JFrame {
 					{ play(); }
 				});
 
-		JMenuItem	restart = new JMenuItem("Restart", 'R');
+		JMenuItem restart = new JMenuItem("Restart", 'R');
 		restart.setToolTipText("Restart Current Game");
 		gameMenu.add(restart);
 		restart.addActionListener(new ActionListener()
@@ -103,41 +74,41 @@ public class MahJong extends JFrame {
 					{ restart(); }
 				});
 		
-		JMenuItem	number = new JMenuItem("Number", 'N');
-		number.setToolTipText("Number This Game");
-		gameMenu.add(number);
-		number.addActionListener(new ActionListener()
-				{ public void actionPerformed(ActionEvent e)
-					{ /*number();*/ }
-				});
+		JMenuItem quit = new JMenuItem("Quit", 'Q');
+		restart.setToolTipText("Quit the game");
+		gameMenu.add(quit);
+		quit.addActionListener(new ActionListener()
+			{ public void actionPerformed(ActionEvent e)
+				{ exit(); }
+			});
 		
 		ButtonGroup	group = new ButtonGroup();
-		JMenu		soundMenu = new JMenu("Sound");
+		JMenu soundMenu = new JMenu("Sound");
 		soundMenu.setMnemonic('S');
 		menuBar.add(soundMenu);
 
-		JRadioButtonMenuItem	on = new JRadioButtonMenuItem("On", true);
-		group.add(on);
-		soundMenu.add(on);
-		on.setToolTipText("Turn Sound On");
-		on.setAccelerator(KeyStroke.getKeyStroke("ctrl O"));
-		on.setMnemonic('O');
-		on.addActionListener(new ActionListener()
+		JRadioButtonMenuItem soundOn = new JRadioButtonMenuItem("On", true);
+		group.add(soundOn);
+		soundMenu.add(soundOn);
+		soundOn.setToolTipText("Turn Sound On");
+		soundOn.setAccelerator(KeyStroke.getKeyStroke("ctrl O"));
+		soundOn.setMnemonic('O');
+		soundOn.addActionListener(new ActionListener()
 				{ public void actionPerformed(ActionEvent e)
 					{ sound = true;
-					fw.sound = true; }
+					fireworks.sound = true; }
 				});
 		
-		JRadioButtonMenuItem	off = new JRadioButtonMenuItem("Off");
-		group.add(off);
-		soundMenu.add(off);
-		off.setToolTipText("Turn Sound Off");
-		off.setAccelerator(KeyStroke.getKeyStroke("ctrl F"));
-		off.setMnemonic('F');
-		off.addActionListener(new ActionListener()
+		JRadioButtonMenuItem soundOff = new JRadioButtonMenuItem("Off");
+		group.add(soundOff);
+		soundMenu.add(soundOff);
+		soundOff.setToolTipText("Turn Sound Off");
+		soundOff.setAccelerator(KeyStroke.getKeyStroke("ctrl F"));
+		soundOff.setMnemonic('F');
+		soundOff.addActionListener(new ActionListener()
 				{ public void actionPerformed(ActionEvent e)
 					{ sound = false;
-					fw.sound = false; }
+					fireworks.sound = false; }
 				});
 		
 		JMenu	moveMenu = new JMenu("Move");
@@ -149,7 +120,7 @@ public class MahJong extends JFrame {
 		moveMenu.add(view);
 		view.addActionListener(new ActionListener()
 				{ public void actionPerformed(ActionEvent e)
-					{ JOptionPane.showMessageDialog(null, scroller,
+					{ JOptionPane.showMessageDialog(null, scrollPane,
 							"Removed Tiles", JOptionPane.PLAIN_MESSAGE); }
 				});
 		
@@ -180,168 +151,140 @@ public class MahJong extends JFrame {
 		instructions.addActionListener(new ActionListener()
 				{ public void actionPerformed(ActionEvent e)
 					{  gameInstructions.display(); }
-				});
-		
+				});	
 	}
 	
-	public void play(){
-		
+	public void play()
+	{	
 		if (JOptionPane.showConfirmDialog(this,
 				"Do you want to play a new game?", "End Program",
 				JOptionPane.YES_NO_OPTION,
-				JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION){
-		
-			contain = getContentPane();
-			contain.removeAll();
-			b = new Board();
-			contain.add(b);
+				JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION)
+		{		
+			container = getContentPane();
+			container.removeAll();
+			board = new Board();
+			container.add(board);
 			validate();
 			removedCount = 0;
-		
 		}
-		
 	}
 	
-	public void restart(){
-		
-		if (JOptionPane.showConfirmDialog(this,
+	public void restart()
+	{	
+		if (JOptionPane.showConfirmDialog(this, 
 				"Do you want to restart the current game?", "End Program",
 				JOptionPane.YES_NO_OPTION,
-				JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION){
-			
-			while (!scroller.undoStack.empty()) 
-				undoMove();
-			
+				JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION)
+		{
+			while (!scrollPane.undoStack.empty()) 
+				undoMove();	
 		}
-	
 	}
 	
-	/*public void number(){
-		
-		if (JOptionPane.showConfirmDialog(this,
-				"Do you want to number this game?", "End Program",
-				JOptionPane.YES_NO_OPTION,
-				JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION){
-			
-			number = numberedGame.seedUsed % 100000;
-			numberedGame.number = number;
-			setTitle("Game Number" + number);
-			
-		}
-		
-	}*/
-	
-	public void Undo(){
-		
+	public void Undo()
+	{
 		if (JOptionPane.showConfirmDialog(this,
 				"Do you want to undo the latest move?", "End Program",
 				JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION)
+		{
 			undoMove();
-		
+		}
 	}
 	
-	public void exit(){
-		
+	public void exit()
+	{
 		if (JOptionPane.showConfirmDialog(this,
 				"Do you want to exit Mah Jong Solitare?", "End Program",
 				JOptionPane.YES_NO_OPTION,
 				JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION)
-		System.exit(0);
-		
+		{
+			System.exit(0);
+		}
 	}
 	
-	public void undoMove(){
+	public void undoMove()
+	{		
+		tile1 = scrollPane.undoStack.peek();
+		scrollPane.undoStack.pop();
+		tile2 = scrollPane.undoStack.peek();
+		scrollPane.undoStack.pop();
+		tile1.addMouseListener(board); 
+		tile2.addMouseListener(board);
+		xCoord1 = tile1.x;
+		yCoord1 = tile1.y;
 			
-			t1 = scroller.undoStack.peek();
-			scroller.undoStack.pop();
-			t2 = scroller.undoStack.peek();
-			scroller.undoStack.pop();
-			t1.addMouseListener(b); 
-			t2.addMouseListener(b);
-			x1 = t1.x;
-			y1 = t1.y;
+		if (tile1.left == null && tile1.right != null)
+			tile1.right.left = tile1;
+		else if (tile1.right == null && tile1.left != null)
+			tile1.left.right = tile1;
 			
-			if (t1.left == null && t1.right != null)
-				t1.right.left = t1;
-			else if (t1.right == null && t1.left != null)
-				t1.left.right = t1;
-			
-			if (t1.bottom != null)
-				t1.bottom.top = t1;
+		if (tile1.bottom != null)
+			tile1.bottom.top = tile1;
 				
-			if (t1.bottom2 != null && 
-					t1.bottom3 != null && t1.bottom4 != null){
+		if (tile1.bottom2 != null && tile1.bottom3 != null && tile1.bottom4 != null)
+		{	
+				tile1.bottom2.top = tile1;
+				tile1.bottom3.top = tile1;
+				tile1.bottom4.top = tile1;
+		}
+			
+		if (tile1.left2 == null && tile1.right2 != null)
+			tile1.right2.left = tile1;
+		else if (tile1.right2 == null && tile1.left2 != null)
+			tile1.left2.right = tile1;
+			
+		xCoord2 = tile2.x;
+		yCoord2 = tile2.y;
+			
+		if (tile2.left == null && tile2.right != null)
+			tile2.right.left = tile2;
+		else if (tile2.right == null && tile2.left != null)
+			tile2.left.right = tile2;
+			
+		if (tile2.bottom != null)
+			tile2.bottom.top = tile2;
 				
-				t1.bottom2.top = t1;
-				t1.bottom3.top = t1;
-				t1.bottom4.top = t1;
+		if (tile2.bottom2 != null && tile2.bottom3 != null && tile2.bottom4 != null)
+		{
+			tile2.bottom2.top = tile2;
+			tile2.bottom3.top = tile2;
+			tile2.bottom4.top = tile2;					
+		}
 				
-			}
+		if (tile2.left2 == null && tile2.right2 != null)
+			tile2.right2.left = tile2;
+		else if (tile2.right2 == null && tile2.left2 != null)
+			tile2.left2.right = tile2;
 			
-			if (t1.left2 == null && t1.right2 != null)
-				t1.right2.left = t1;
-			else if (t1.right2 == null && t1.left2 != null)
-				t1.left2.right = t1;
-			
-			x2 = t2.x;
-			y2 = t2.y;
-			
-			if (t2.left == null && t2.right != null)
-				t2.right.left = t2;
-			else if (t2.right == null && t2.left != null)
-				t2.left.right = t2;
-			
-			if (t2.bottom != null)
-				t2.bottom.top = t2;
-				
-			if (t2.bottom2 != null && 
-					t2.bottom3 != null && t2.bottom4 != null){
-			
-				t2.bottom2.top = t2;
-				t2.bottom3.top = t2;
-				t2.bottom4.top = t2;
-							
-			}
-				
-			if (t2.left2 == null && t2.right2 != null)
-				t2.right2.left = t2;
-			else if (t2.right2 == null && t2.left2 != null)
-				t2.left2.right = t2;
-			
-			t1.setLocation(x1, y1);
-			b.add(t1);
-			t2.setLocation(x2, y2);
-			b.add(t2);
-			b.setComponentZOrder(t1, t1.getZOrder());
-			b.setComponentZOrder(t2, t2.getZOrder());
-			
-			revalidate();
-			repaint();
-			removedCount--;
-		
+		tile1.setLocation(xCoord1, yCoord1);
+		board.add(tile1);
+		tile2.setLocation(xCoord2, yCoord2);
+		board.add(tile2);
+		board.setComponentZOrder(tile1, tile1.getZOrder());
+		board.setComponentZOrder(tile2, tile2.getZOrder());
+
+		revalidate();
+		repaint();
+		removedCount--;
 	}
 	
-	public class Board extends JPanel implements MouseListener{
-		
-		/**
-		 * 
-		 */
+	public class Board extends JPanel implements MouseListener
+	{
 		private static final long serialVersionUID = 1L;
-		public Board(){
-			
-			setLayout(null); //must do "setSize() in Tile
+		public Board()
+		{
+			setLayout(null);
 			setBackground(Color.YELLOW);
-			makeMenu();
+			drawMenu();
 			
 			url = Board.class.getResource("images/dragon_bg.png");
-			image = new ImageIcon(url);
-			image = new ImageIcon(image.getImage().getScaledInstance(655, -1, 
-					Image.SCALE_SMOOTH));
+			imageIcon = new ImageIcon(url);
+			imageIcon = new ImageIcon(imageIcon.getImage().getScaledInstance(655, -1, Image.SCALE_SMOOTH));
 		
 			Tile t;
-			TileStack ts = new TileStack(); //TileStack(false)
-			//numberedGame.seedUsed = ts.seedCaptured;
+			TileStack ts = new TileStack();
 			
 			int x;
 			int y;
@@ -358,48 +301,47 @@ public class MahJong extends JFrame {
 			int bottomRow = 0;
 			boolean repeat = false;
 			
-			t = ts.stack.remove(ts.stack.size() - 1);
+			t = ts.tileStack.remove(ts.tileStack.size() - 1);
 			t.addMouseListener(this);
 			t.x = 465;
 			t.y = 175;
 			x = t.x;
 			y = t.y;
-			ts.stack.get(ts.stack.size() - 1).top = t;
-			ts.stack.get(ts.stack.size() - 2).top = t;
-			ts.stack.get(ts.stack.size() - 3).top = t;
-			ts.stack.get(ts.stack.size() - 4).top = t;
-			t.bottom = ts.stack.get(ts.stack.size() - 1);
-			t.bottom2 = ts.stack.get(ts.stack.size() - 2);
-			t.bottom3 = ts.stack.get(ts.stack.size() - 3);
-			t.bottom4 = ts.stack.get(ts.stack.size() - 4);
+			ts.tileStack.get(ts.tileStack.size() - 1).top = t;
+			ts.tileStack.get(ts.tileStack.size() - 2).top = t;
+			ts.tileStack.get(ts.tileStack.size() - 3).top = t;
+			ts.tileStack.get(ts.tileStack.size() - 4).top = t;
+			t.bottom = ts.tileStack.get(ts.tileStack.size() - 1);
+			t.bottom2 = ts.tileStack.get(ts.tileStack.size() - 2);
+			t.bottom3 = ts.tileStack.get(ts.tileStack.size() - 3);
+			t.bottom4 = ts.tileStack.get(ts.tileStack.size() - 4);
 			t.setLocation(x, y);
 			add(t);
 			
-			for (int j = 230; j > (230 - (75 * 2)); j -= 75){
-				
+			for (int j = 230; j > (230 - (75 * 2)); j -= 75)
+			{	
 				if (j == 230)
 					bottom = 9;
 				else
 					bottom += 2;
 				
-				for (int i = 420; i < (420 + (60 * 2)); i += 60){
-				
-					t = ts.stack.remove(ts.stack.size() - 1);
+				for (int i = 420; i < (420 + (60 * 2)); i += 60)
+				{
+					t = ts.tileStack.remove(ts.tileStack.size() - 1);
 					t.addMouseListener(this);
 					t.x = i;
 					t.y = j;
 					x = t.x;
 					y = t.y;
-					ts.stack.get(ts.stack.size() - bottom).top = t;
-					t.bottom = ts.stack.get(ts.stack.size() - bottom);
+					ts.tileStack.get(ts.tileStack.size() - bottom).top = t;
+					t.bottom = ts.tileStack.get(ts.tileStack.size() - bottom);
 					t.setLocation(x, y);
 					add(t);
-				
 				}
-				
 			}
 			
-			for (int j = 330; j > (330 - (75 * 4)); j -= 75){
+			for (int j = 330; j > (330 - (75 * 4)); j -= 75)
+			{
 				if (j == 330)
 					bottom = 23;
 				else
@@ -407,36 +349,31 @@ public class MahJong extends JFrame {
 				
 				for (int i = 340; i < (340 + (60 * 4)); i += 60){
 				
-					t = ts.stack.remove(ts.stack.size() - 1);
+					t = ts.tileStack.remove(ts.tileStack.size() - 1);
 					t.addMouseListener(this);
 					t.x = i;
 					t.y = j;
 					x = t.x;
 					y = t.y;
 					
-					if (i != (340 + (60 * 3))){
-						
-						ts.stack.get(ts.stack.size() - 1).left = t;
-						t.right = ts.stack.get(ts.stack.size() - 1);
-						
+					if (i != (340 + (60 * 3)))
+					{	
+						ts.tileStack.get(ts.tileStack.size() - 1).left = t;
+						t.right = ts.tileStack.get(ts.tileStack.size() - 1);	
 					}
 						
-					ts.stack.get(ts.stack.size() - bottom).top = t;
-					t.bottom = ts.stack.get(ts.stack.size() - bottom);
+					ts.tileStack.get(ts.tileStack.size() - bottom).top = t;
+					t.bottom = ts.tileStack.get(ts.tileStack.size() - bottom);
 					t.setLocation(x, y);
 					add(t);
-				
 				}
-				
 			}
-			
-						
-			for (int j = 430; j > (430 - (75 * 6)); j -= 75){
-			
-				bottomRow++;
-				
-				switch (bottomRow){
-					
+
+			for (int j = 430; j > (430 - (75 * 6)); j -= 75)
+			{
+				bottomRow++;	
+				switch (bottomRow)
+				{
 					case 1:
 						bottom = 49;
 						break;
@@ -453,55 +390,50 @@ public class MahJong extends JFrame {
 						bottom += 7;
 						break;
 					case 6:
-						bottom += 3;
-					
+						bottom += 3;	
 					}
 				
-				for (int i = 260; i < (260 + (60 * 6)); i += 60){
-				
-					t = ts.stack.remove(ts.stack.size() - 1);
+				for (int i = 260; i < (260 + (60 * 6)); i += 60)
+				{
+					t = ts.tileStack.remove(ts.tileStack.size() - 1);
 					t.addMouseListener(this);
 					t.x = i;
 					t.y = j;
 					x = t.x;
 					y = t.y;
 					
-					if (i != (260 + (60 * 5))){
-						
-						ts.stack.get(ts.stack.size() - 1).left = t;
-						t.right = ts.stack.get(ts.stack.size() - 1);
-					
+					if (i != (260 + (60 * 5)))
+					{	
+						ts.tileStack.get(ts.tileStack.size() - 1).left = t;
+						t.right = ts.tileStack.get(ts.tileStack.size() - 1);
 					}
-					ts.stack.get(ts.stack.size() - bottom).top = t;
-					t.bottom = ts.stack.get(ts.stack.size() - bottom);
+					ts.tileStack.get(ts.tileStack.size() - bottom).top = t;
+					t.bottom = ts.tileStack.get(ts.tileStack.size() - bottom);
 					t.setLocation(x, y);
 					add(t);
-				
 				}
-				
 			}
 			
-			for (int j = 530; j > (530 - (75 * 4)); j -= 75){
-				
-				if (repeat && row == r1){
-					
-				 	t = ts.stack.remove(ts.stack.size() - 1);
+			for (int j = 530; j > (530 - (75 * 4)); j -= 75)
+			{	
+				if (repeat && row == r1)
+				{
+				 	t = ts.tileStack.remove(ts.tileStack.size() - 1);
 				 	t.addMouseListener(this);
 					t.x = 0;
 					t.y = 270;
 					x = t.x;
 					y = t.y;
-					ts.stack.get(ts.stack.size() - 1).left = t;
-					t.right = ts.stack.get(ts.stack.size() - 1);
-					ts.stack.get(ts.stack.size() - 13).left = t;
-					t.right2 = ts.stack.get(ts.stack.size() - 13);
+					ts.tileStack.get(ts.tileStack.size() - 1).left = t;
+					t.right = ts.tileStack.get(ts.tileStack.size() - 1);
+					ts.tileStack.get(ts.tileStack.size() - 13).left = t;
+					t.right2 = ts.tileStack.get(ts.tileStack.size() - 13);
 					t.setLocation(x, y);
 					add(t);
-					
 				}
-				for (int i = row; i < (row + (60 * number)); i += 60){
-					
-					t = ts.stack.remove(ts.stack.size() - 1);
+				for (int i = row; i < (row + (60 * number)); i += 60)
+				{
+					t = ts.tileStack.remove(ts.tileStack.size() - 1);
 					t.addMouseListener(this);
 					t.x = i;
 					t.y = j;
@@ -510,15 +442,15 @@ public class MahJong extends JFrame {
 					
 					if (i != (row + (60 * (number - 1)))){
 						
-						ts.stack.get(ts.stack.size() - 1).left = t;
-						t.right = ts.stack.get(ts.stack.size() - 1);
+						ts.tileStack.get(ts.tileStack.size() - 1).left = t;
+						t.right = ts.tileStack.get(ts.tileStack.size() - 1);
 					
 					}
 
 					else if (j == (530 - (75 * 3))){
 						
-						ts.stack.get(ts.stack.size() - 13).left2 = t;
-						t.right = ts.stack.get(ts.stack.size() - 13);
+						ts.tileStack.get(ts.tileStack.size() - 13).left2 = t;
+						t.right = ts.tileStack.get(ts.tileStack.size() - 13);
 						
 					}
 					
@@ -552,7 +484,7 @@ public class MahJong extends JFrame {
 				
 				for (int i = row; i < (row + (60 * number)); i += 60){
 					
-					t = ts.stack.remove(ts.stack.size() - 1);
+					t = ts.tileStack.remove(ts.tileStack.size() - 1);
 					t.addMouseListener(this);
 					t.x = i;
 					t.y = j;
@@ -561,8 +493,8 @@ public class MahJong extends JFrame {
 					
 					if (i != (row + (60 * (number - 1)))){
 					  
-						ts.stack.get(ts.stack.size() - 1).left = t;
-						t.right = ts.stack.get(ts.stack.size() - 1);
+						ts.tileStack.get(ts.tileStack.size() - 1).left = t;
+						t.right = ts.tileStack.get(ts.tileStack.size() - 1);
 					
 					}
 					t.setLocation(x, y);
@@ -572,25 +504,25 @@ public class MahJong extends JFrame {
 				
 				if (j == 230){
 					
-					ts.stack.get(ts.stack.size() - 1).left = t;
-					t.right = ts.stack.get(ts.stack.size() - 1);
+					ts.tileStack.get(ts.tileStack.size() - 1).left = t;
+					t.right = ts.tileStack.get(ts.tileStack.size() - 1);
 					
 				}
 					
 				if (repeat && row == r1){
 					
-				 	t = ts.stack.remove(ts.stack.size() - 1);
+				 	t = ts.tileStack.remove(ts.tileStack.size() - 1);
 				 	t.addMouseListener(this);
 				 	t.x = 780;
 					t.y = 270;
 					x = t.x;
 					y = t.y;
-					ts.stack.get(ts.stack.size() - 1).left = t;
-					t.right = ts.stack.get(ts.stack.size() - 1);
+					ts.tileStack.get(ts.tileStack.size() - 1).left = t;
+					t.right = ts.tileStack.get(ts.tileStack.size() - 1);
 					t.setLocation(x, y);
 					add(t);
 					
-					t = ts.stack.remove(ts.stack.size() - 1);
+					t = ts.tileStack.remove(ts.tileStack.size() - 1);
 					t.addMouseListener(this);
 					t.x = 840;
 					t.y = 270;
@@ -918,7 +850,7 @@ public class MahJong extends JFrame {
 			
 			super.paintComponent(g);
 			
-			g.drawImage(image.getImage(), 105, 110, this);
+			g.drawImage(imageIcon.getImage(), 105, 110, this);
 			
 		}
 		
@@ -943,7 +875,7 @@ public class MahJong extends JFrame {
 					if (first == null){
 						
 						first = tile;
-						first.setBorder(selected);
+						first.setBorder(selectedTile);
 						return;
 						
 					}
@@ -1013,7 +945,7 @@ public class MahJong extends JFrame {
 						remove(first);
 						repaint();
 						
-						scroller.addToUndo(second, first);
+						scrollPane.addToUndo(second, first);
 						
 						first = null;
 						second = null;
@@ -1037,17 +969,17 @@ public class MahJong extends JFrame {
 						});
 						
 						frame.setSize(1000, 800);
-						frame.add(fw.getPanel());
+						frame.add(fireworks.getPanel());
 						frame.setVisible(true);
 
-						fw.setExplosions(0, 1000);
-						fw.fire();
+						fireworks.setExplosions(0, 1000);
+						fireworks.fire();
 
 
 						try
 						{
 							Thread.sleep(10000);
-							fw.stop();
+							fireworks.stop();
 						}
 						catch (InterruptedException ie) {}
 					}

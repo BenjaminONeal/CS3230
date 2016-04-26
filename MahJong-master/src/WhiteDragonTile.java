@@ -1,70 +1,55 @@
 import java.awt.*;
 
-public class WhiteDragonTile extends Tile{
-	
-	/**
-	 * 
-	 */
+public class WhiteDragonTile extends Tile
+{
 	private static final long serialVersionUID = 1L;
 
-	public WhiteDragonTile(){
-	
+	public WhiteDragonTile()
+	{
 		setToolTipText(toString());
-	
 	}
 	
-	public String toString(){
-		
+	public String toString()
+	{
 		return "White Dragon";
-		
 	}
 
-	public void paintComponent(Graphics g){
-		
+	public void paintComponent(Graphics g)
+	{
 		super.paintComponent(g);
-		
 		g.setColor(Color.BLUE);
-		
 		boolean filled = true;
 		
-		for (int i = 5; i < 65; i += 10){
-			
-			if (filled){
-				
+		for (int i = 5; i < 65; i += 10)
+		{
+			if (filled)
+			{
 				g.fillRect(30, i, 6, 10);
 				g.drawRect(75, i, 5, 10);
 				filled = false;
-				
 			}
-				
-			else{
-				
+			else
+			{
 				g.drawRect(30, i, 5, 10);
 				g.fillRect(75, i, 6, 11);
-				filled = true;
-				
+				filled = true;	
 			}
-			
 		}
 		
-		for (int i = 35; i < 75; i += 10){
-			
-			if (filled){
-				
+		for (int i = 35; i < 75; i += 10)
+		{
+			if (filled)
+			{
 				g.drawRect(i, 5, 10, 5);
 				g.fillRect(i, 60, 10, 6);
 				filled = false;
-				
 			}
-				
-			else{
-				
+			else
+			{
 				g.fillRect(i, 5, 10, 6);
 				g.drawRect(i, 60, 10, 5);
-				filled = true;
-				
-			}
-			
+				filled = true;	
+			}			
 		}
 	
 	}

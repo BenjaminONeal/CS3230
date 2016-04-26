@@ -1,22 +1,17 @@
-abstract public class PictureTile extends Tile{
-	
-	/**
-	 * 
-	 */
+abstract public class PictureTile extends Tile
+{
 	private static final long serialVersionUID = 1L;
 	private String name;
 	
-	public PictureTile(String inName){
-		
-		name = inName;
+	public PictureTile(String name)
+	{	
+		this.name = name;
 		setToolTipText(toString());
-		
 	}
 	
-	public String toString(){
-		
+	public String toString()
+	{
 		return name;
-		
 	}
 	
 	/*public static void main(String[] args)
@@ -42,5 +37,4 @@ abstract public class PictureTile extends Tile{
 		frame.pack();
 		frame.setVisible(true);
 	}*/
-
 }

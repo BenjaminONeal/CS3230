@@ -104,5 +104,9 @@ public class PlayClip implements LineListener
 			event.getLine().close();
 	}
 
-
+	public static void main(String[] args)
+	{
+		PlayClip clip = new PlayClip("audio/stone-scraping.wav", true);
+		clip.play();
+	}
 }

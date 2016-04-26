@@ -1,32 +1,26 @@
 import java.awt.*;
 import javax.swing.*;
 
-public class Circle extends JPanel{
-
-	/**
-	 * 
-	 */
+public class Circle extends JPanel
+{
 	private static final long serialVersionUID = 1L;
-	protected int x;
-	protected int y;
+	protected int xCoord;
+	protected int yCoord;
 	protected Color color;
 	
-	public Circle(int x, int y, Color color){
+	public Circle(int xCoord, int yCoord, Color color){
 		
-		this.x = x;
-		this.y = y;
+		this.xCoord = xCoord;
+		this.yCoord = yCoord;
 		this.color = color;
-		
 	}
 	
-	public void draw(Graphics g){
-		
+	public void draw(Graphics g)
+	{
 		g.setColor(color);
-		g.fillOval(x, y, 15, 15);
+		g.fillOval(xCoord, yCoord, 15, 15);
 		g.setColor(Color.WHITE);
-		g.drawLine(x + 3, y + 3, x + 12, y + 12);
-		g.drawLine(x + 3, y + 12, x + 12, y + 3);
-		
+		g.drawLine(xCoord + 3, yCoord + 3, xCoord + 12, yCoord + 12);
+		g.drawLine(xCoord + 3, yCoord + 12, xCoord + 12, yCoord + 3);
 	}
-	
 }

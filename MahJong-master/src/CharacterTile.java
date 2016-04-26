@@ -1,43 +1,34 @@
 import java.awt.*;
 
 
-public class CharacterTile extends Tile{
-	
-	/**
-	 * 
-	 */
+public class CharacterTile extends Tile
+{
 	private static final long serialVersionUID = 1L;
-	private String[] character = { "\u4E00", "\u4E8C", "\u4E09", "\u56DB", "\u4E94", "\u516D", 
-			"\u4E03", "\u516B", "\u4E5D" };
+	private String[] character = { "\u4E00", "\u4E8C", "\u4E09", "\u56DB", "\u4E94", "\u516D", "\u4E03", "\u516B", "\u4E5D" };
 	protected char symbol;
 	
-	public CharacterTile(char inSymbol){
-		
-			symbol = inSymbol;
-			setToolTipText(toString());
-			
+	public CharacterTile(char symbol)
+	{
+			this.symbol = symbol;
+			setToolTipText(toString());	
 	}
 	
-	boolean matches(Tile inOther){
-		
+	boolean matches(Tile inOther)
+	{
 		CharacterTile otherTile = (CharacterTile) inOther;
-		
 		if (this.getClass() == inOther.getClass() && this.symbol == otherTile.symbol) 
 			return true;
 		else
 			return false;
-		
 	}
 	
-	public void paintComponent(Graphics g){
-		
+	public void paintComponent(Graphics g)
+	{
 		super.paintComponent(g);
-		
 		Font f = g.getFont().deriveFont(30F);
 		Font h = g.getFont().deriveFont(5);
-		
-		switch(symbol){
-			
+		switch(symbol)
+		{
 			case 'N' :
 			case 'n' :
 				g.setColor(Color.RED);
@@ -100,39 +91,35 @@ public class CharacterTile extends Tile{
 				g.drawString(character[symbol - 49], 40, 30);
 				g.setFont(f);
 				g.setColor(Color.RED);
-				g.drawString("\u842C", 40, 65);
-			
+				g.drawString("\u842C", 40, 65);	
 		}
-		
 	}
 	
-	public String toString(){
-		
-		switch(symbol){
-		
-		case 'N' :
-		case 'n' :
-			return "North Wind";
-		case 'E' :
-		case 'e' :
-			return "East Wind";
-		case 'W' :
-		case 'w' :
-			return "West Wind";
-		case 'S' :
-		case 's' :
-			return "South Wind";
-		case 'C' :
-		case 'c' :
-			return "Red Dragon";
-		case 'F' :
-		case 'f' :
-			return "Green Dragon";
-		default:
-			return "Character " + symbol;
-			
+	public String toString()
+	{
+		switch(symbol)
+		{
+			case 'N' :
+			case 'n' :
+				return "North Wind";
+			case 'E' :
+			case 'e' :
+				return "East Wind";
+			case 'W' :
+			case 'w' :
+				return "West Wind";
+			case 'S' :
+			case 's' :
+				return "South Wind";
+			case 'C' :
+			case 'c' :
+				return "Red Dragon";
+			case 'F' :
+			case 'f' :
+				return "Green Dragon";
+			default:
+				return "Character " + symbol;		
 		}
-		
 	}
 	
 	/*public static void main(String[] args)
@@ -168,5 +155,4 @@ public class CharacterTile extends Tile{
 		frame.pack();
 		frame.setVisible(true);
 	}*/
-
 }

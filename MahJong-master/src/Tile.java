@@ -1,11 +1,9 @@
 import java.awt.*;
 
 import javax.swing.*;
-abstract public class Tile extends JPanel{
-	
-	/**
-	 * 
-	 */
+
+abstract public class Tile extends JPanel
+{
 	private static final long serialVersionUID = 1L;
 	private static final Dimension SIZE;
 	private static final GradientPaint GRAD1;
