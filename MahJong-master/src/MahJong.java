@@ -318,14 +318,14 @@ public class MahJong extends JFrame
 			t.setLocation(x, y);
 			add(t);
 			
-			for (int j = 230; j > (230 - (75 * 2)); j -= 75)
+			for (int j = 230; j > 80; j -= 75)
 			{	
 				if (j == 230)
 					bottom = 9;
 				else
 					bottom += 2;
 				
-				for (int i = 420; i < (420 + (60 * 2)); i += 60)
+				for (int i = 420; i < 540; i += 60)
 				{
 					t = ts.tileStack.remove(ts.tileStack.size() - 1);
 					t.addMouseListener(this);
@@ -340,14 +340,14 @@ public class MahJong extends JFrame
 				}
 			}
 			
-			for (int j = 330; j > (330 - (75 * 4)); j -= 75)
+			for (int j = 330; j > 30; j -= 75)
 			{
 				if (j == 330)
 					bottom = 23;
 				else
 					bottom += 2;
 				
-				for (int i = 340; i < (340 + (60 * 4)); i += 60){
+				for (int i = 340; i < 580; i += 60){
 				
 					t = ts.tileStack.remove(ts.tileStack.size() - 1);
 					t.addMouseListener(this);
@@ -356,7 +356,7 @@ public class MahJong extends JFrame
 					x = t.xCoord;
 					y = t.yCoord;
 					
-					if (i != (340 + (60 * 3)))
+					if (i != 520)//(340 + (60 * 3)))
 					{	
 						ts.tileStack.get(ts.tileStack.size() - 1).left = t;
 						t.right = ts.tileStack.get(ts.tileStack.size() - 1);	
@@ -369,7 +369,7 @@ public class MahJong extends JFrame
 				}
 			}
 
-			for (int j = 430; j > (430 - (75 * 6)); j -= 75)
+			for (int j = 430; j > -20; j -= 75)
 			{
 				bottomRow++;	
 				switch (bottomRow)
@@ -393,7 +393,7 @@ public class MahJong extends JFrame
 						bottom += 3;	
 					}
 				
-				for (int i = 260; i < (260 + (60 * 6)); i += 60)
+				for (int i = 260; i < 620; i += 60)
 				{
 					t = ts.tileStack.remove(ts.tileStack.size() - 1);
 					t.addMouseListener(this);
@@ -402,7 +402,7 @@ public class MahJong extends JFrame
 					x = t.xCoord;
 					y = t.yCoord;
 					
-					if (i != (260 + (60 * 5)))
+					if (i != 560)
 					{	
 						ts.tileStack.get(ts.tileStack.size() - 1).left = t;
 						t.right = ts.tileStack.get(ts.tileStack.size() - 1);
@@ -414,7 +414,7 @@ public class MahJong extends JFrame
 				}
 			}
 			
-			for (int j = 530; j > (530 - 300); j -= 75)
+			for (int j = 530; j > 230; j -= 75)
 			{	
 				if (repeat && row == row1)
 				{
@@ -446,7 +446,7 @@ public class MahJong extends JFrame
 						t.right = ts.tileStack.get(ts.tileStack.size() - 1);
 					
 					}
-					else if (j == (530 - (75 * 3)))
+					else if (j == 305)
 					{	
 						ts.tileStack.get(ts.tileStack.size() - 13).left2 = t;
 						t.right = ts.tileStack.get(ts.tileStack.size() - 13);	
@@ -479,7 +479,7 @@ public class MahJong extends JFrame
 				}	
 			}
 			
-			for (int j = 230; j > (230 - (75 * 4)); j -= 75)
+			for (int j = 230; j > -70; j -= 75)
 			{	
 				for (int i = row; i < (row + (60 * number)); i += 60)
 				{	
