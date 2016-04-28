@@ -60,17 +60,25 @@ public class MahJong extends JFrame
 		play.setToolTipText("Start New Game");
 		gameMenu.add(play);
 		play.addActionListener(new ActionListener()
-				{ public void actionPerformed(ActionEvent e)
-					{ play(); }
-				});
+			{ public void actionPerformed(ActionEvent e)
+				{ play(); }
+			});
 
 		JMenuItem restart = new JMenuItem("Restart", 'R');
 		restart.setToolTipText("Restart Current Game");
 		gameMenu.add(restart);
 		restart.addActionListener(new ActionListener()
-				{ public void actionPerformed(ActionEvent e)
-					{ restart(); }
-				});
+			{ public void actionPerformed(ActionEvent e)
+				{ restart(); }
+			});
+		
+		JMenuItem numbered = new JMenuItem("Numbered", 'N');
+		numbered.setToolTipText("Replay a numbered game");
+		gameMenu.add(numbered);
+		numbered.addActionListener(new ActionListener()
+			{ public void actionPerformed(ActionEvent e)
+				{ restart(); }
+			});
 		
 		JMenuItem quit = new JMenuItem("Quit", 'Q');
 		restart.setToolTipText("Quit the game");
@@ -92,10 +100,11 @@ public class MahJong extends JFrame
 		soundOn.setAccelerator(KeyStroke.getKeyStroke("ctrl O"));
 		soundOn.setMnemonic('O');
 		soundOn.addActionListener(new ActionListener()
-				{ public void actionPerformed(ActionEvent e)
-					{ sound = true;
-					fireworks.sound = true; }
-				});
+			{ public void actionPerformed(ActionEvent e)
+				{	sound = true;
+					fireworks.sound = true;
+				}
+			});
 		
 		JRadioButtonMenuItem soundOff = new JRadioButtonMenuItem("Off");
 		group.add(soundOff);
@@ -104,10 +113,11 @@ public class MahJong extends JFrame
 		soundOff.setAccelerator(KeyStroke.getKeyStroke("ctrl F"));
 		soundOff.setMnemonic('F');
 		soundOff.addActionListener(new ActionListener()
-				{ public void actionPerformed(ActionEvent e)
-					{ sound = false;
-					fireworks.sound = false; }
-				});
+			{ public void actionPerformed(ActionEvent e)
+				{	sound = false;
+					fireworks.sound = false;
+				}
+			});
 		
 		JMenu	moveMenu = new JMenu("Move");
 		moveMenu.setMnemonic('M');
@@ -117,19 +127,19 @@ public class MahJong extends JFrame
 		view.setToolTipText("View Your Moves");
 		moveMenu.add(view);
 		view.addActionListener(new ActionListener()
-				{ public void actionPerformed(ActionEvent e)
-					{ JOptionPane.showMessageDialog(null, scrollPane,
-							"Removed Tiles", JOptionPane.PLAIN_MESSAGE); }
-				});
+			{ public void actionPerformed(ActionEvent e)
+				{	JOptionPane.showMessageDialog(null, scrollPane,
+					"Removed Tiles", JOptionPane.PLAIN_MESSAGE);
+				}
+			});
 		
 		JMenuItem	undo = new JMenuItem("Undo", 'U');
 		undo.setToolTipText("Undo Last Move");
 		moveMenu.add(undo);
 		undo.addActionListener(new ActionListener()
-				{public void actionPerformed(ActionEvent e)
+			{public void actionPerformed(ActionEvent e)
 				{ Undo(); }
-		
-				});
+			});
 			
 		JMenu	helpMenu = new JMenu("Help");
 		helpMenu.setMnemonic('H');
@@ -139,17 +149,17 @@ public class MahJong extends JFrame
 		rules.setToolTipText("Game Rules");
 		helpMenu.add(rules);
 		rules.addActionListener(new ActionListener()
-				{ public void actionPerformed(ActionEvent e)
-					{  helpRules.display(); }
-				});
+			{ public void actionPerformed(ActionEvent e)
+				{  helpRules.display(); }
+			});
 		
 		JMenuItem	instructions = new JMenuItem("Instructions", 'I');
 		instructions.setToolTipText("Game Rules");
 		helpMenu.add(instructions);
 		instructions.addActionListener(new ActionListener()
-				{ public void actionPerformed(ActionEvent e)
-					{  helpInstructions.display(); }
-				});	
+			{ public void actionPerformed(ActionEvent e)
+				{  helpInstructions.display(); }
+			});	
 	}
 	
 	public void play()
