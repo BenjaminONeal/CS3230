@@ -414,7 +414,7 @@ public class MahJong extends JFrame
 				}
 			}
 			
-			for (int j = 530; j > (530 - (75 * 4)); j -= 75)
+			for (int j = 530; j > (530 - 300); j -= 75)
 			{	
 				if (repeat && row == row1)
 				{
