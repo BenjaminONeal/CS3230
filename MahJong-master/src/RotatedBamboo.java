@@ -13,7 +13,6 @@ public class RotatedBamboo extends Bamboo
 	public void draw(Graphics g)
 	{
 		Graphics2D g2 = (Graphics2D)g;
-		
 		g2.rotate(Math.toRadians(degree));
 		super.draw(g2);
 	}

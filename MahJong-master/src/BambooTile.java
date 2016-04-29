@@ -72,16 +72,13 @@ public class BambooTile extends RankTile
 			bambooList.add(new Bamboo(33, 52, Color.RED));
 			bambooList.add(new Bamboo(48, 52, Color.GREEN));
 			bambooList.add(new Bamboo(63, 52, Color.BLUE));
-			break;
-			
+			break;	
 		}
-		
 	}
 	
-	public String toString(){
-		
-		return "Bamboo " + rank;
-		
+	public String toString()
+	{	
+		return "Bamboo " + rank;	
 	}
 	
 	public void paintComponent(Graphics g)

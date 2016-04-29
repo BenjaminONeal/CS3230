@@ -8,8 +8,8 @@ public class Circle extends JPanel
 	protected int yCoord;
 	protected Color color;
 	
-	public Circle(int xCoord, int yCoord, Color color){
-		
+	public Circle(int xCoord, int yCoord, Color color)
+	{	
 		this.xCoord = xCoord;
 		this.yCoord = yCoord;
 		this.color = color;
